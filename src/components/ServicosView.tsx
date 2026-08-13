@@ -62,7 +62,7 @@ export const ServicosView: React.FC = () => {
             </div>
 
             <a
-              href="https://wa.me/5551992000130"
+              href={`https://wa.me/5551992000130?text=${encodeURIComponent('Olá, vim pelo site da Casti Car. Quero marcar uma conversa para saber como funciona!')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-6 w-full py-4 rounded-full text-sm font-semibold bg-gradient-to-br from-[#009577] to-[#01484B] hover:opacity-95 text-white transition-all text-center flex items-center justify-center gap-2 shadow-lg cursor-pointer"
@@ -72,12 +72,12 @@ export const ServicosView: React.FC = () => {
             </a>
           </div>
 
-          {/* INSPEÇÃO PRÉ-COMPRA */}
+          {/* AVALIAÇÃO VEICULAR */}
           <div className="card-surface p-8 sm:p-10 rounded-[14px] relative flex flex-col justify-between hover:border-white/20 transition-colors shadow-xl">
             <div>
               <div className="flex items-center gap-3 mb-2">
                 <ShieldCheck className="w-6 h-6 text-white/80" />
-                <h2 className="font-display text-2xl sm:text-3xl font-bold">Inspeção Pré-Compra</h2>
+                <h2 className="font-display text-2xl sm:text-3xl font-bold">Avaliação Veicular</h2>
               </div>
               <p className="text-white/70 font-medium text-sm mb-4">
                 Já achou o carro? Confirma antes de assinar.
@@ -115,13 +115,13 @@ export const ServicosView: React.FC = () => {
             </div>
 
             <a
-              href="https://wa.me/5551992000130"
+              href={`https://wa.me/5551992000130?text=${encodeURIComponent('Olá, vim pelo site da Casti Car. Quero marcar uma conversa para saber como funciona!')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-6 w-full py-4 rounded-full text-sm font-semibold bg-white text-gray-900 hover:bg-gray-100 transition-colors text-center flex items-center justify-center gap-2 cursor-pointer"
             >
               <WhatsAppIcon className="w-4 h-4" />
-              <span>Quero vistoriar meu carro</span>
+              <span>Solicitar Avaliação Veicular</span>
             </a>
           </div>
 

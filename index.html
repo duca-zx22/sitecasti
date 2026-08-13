@@ -7,25 +7,40 @@
     <script>
       (function() {
         try {
-          var currentFetch = window.fetch;
-          if (typeof currentFetch === 'function') {
-            var proto = window;
-            while (proto && !Object.getOwnPropertyDescriptor(proto, 'fetch')) {
-              proto = Object.getPrototypeOf(proto);
-            }
-            var desc = proto ? Object.getOwnPropertyDescriptor(proto, 'fetch') : null;
-            if (!desc || (desc.get && !desc.set)) {
-              Object.defineProperty(window, 'fetch', {
-                get: function() { return currentFetch; },
-                set: function(fn) { currentFetch = fn; },
-                configurable: true,
-                enumerable: true
-              });
-            }
+          var _rawFetch = window.fetch;
+          var _currentFetch = typeof _rawFetch === 'function' ? _rawFetch.bind(window) : _rawFetch;
+
+          function getFetch() {
+            return _currentFetch;
           }
-        } catch (e) {
-          // Silent catch for sandboxed environments
-        }
+
+          function setFetch(val) {
+            _currentFetch = val;
+          }
+
+          var descriptor = {
+            get: getFetch,
+            set: setFetch,
+            configurable: true,
+            enumerable: true
+          };
+
+          if (typeof Window !== 'undefined' && Window.prototype) {
+            try {
+              Object.defineProperty(Window.prototype, 'fetch', descriptor);
+            } catch (_) {}
+          }
+
+          try {
+            Object.defineProperty(window, 'fetch', descriptor);
+          } catch (_) {}
+
+          if (typeof globalThis !== 'undefined' && globalThis !== window) {
+            try {
+              Object.defineProperty(globalThis, 'fetch', descriptor);
+            } catch (_) {}
+          }
+        } catch (_) {}
       })();
     </script>
   </head>

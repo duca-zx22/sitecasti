@@ -1,29 +1,36 @@
-// Patch window.fetch if it has only a getter in sandboxed iframe environments
+// Patch window.fetch and Window.prototype.fetch for sandboxed environments
 (function () {
   try {
-    let currentFetch = window.fetch;
-    if (typeof currentFetch === 'function') {
-      let proto: any = window;
-      while (proto && !Object.getOwnPropertyDescriptor(proto, 'fetch')) {
-        proto = Object.getPrototypeOf(proto);
-      }
-      const desc = proto ? Object.getOwnPropertyDescriptor(proto, 'fetch') : null;
-      if (!desc || (desc.get && !desc.set)) {
-        Object.defineProperty(window, 'fetch', {
-          get() {
-            return currentFetch;
-          },
-          set(fn) {
-            currentFetch = fn;
-          },
-          configurable: true,
-          enumerable: true,
-        });
-      }
+    const rawFetch = window.fetch;
+    let currentFetch = typeof rawFetch === 'function' ? rawFetch.bind(window) : rawFetch;
+
+    const descriptor: PropertyDescriptor = {
+      get() {
+        return currentFetch;
+      },
+      set(fn: any) {
+        currentFetch = fn;
+      },
+      configurable: true,
+      enumerable: true,
+    };
+
+    if (typeof Window !== 'undefined' && Window.prototype) {
+      try {
+        Object.defineProperty(Window.prototype, 'fetch', descriptor);
+      } catch (_) {}
     }
-  } catch (_e) {
-    // Ignore error if property is strictly sealed
-  }
+
+    try {
+      Object.defineProperty(window, 'fetch', descriptor);
+    } catch (_) {}
+
+    if (typeof globalThis !== 'undefined' && globalThis !== window) {
+      try {
+        Object.defineProperty(globalThis, 'fetch', descriptor);
+      } catch (_) {}
+    }
+  } catch (_) {}
 })();
 
 import {StrictMode} from 'react';

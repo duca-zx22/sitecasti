@@ -47,19 +47,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate }) => {
       />
 
       {/* SEÇÃO DE SERVIÇOS (ANTES DO COMO FUNCIONA) */}
-      <section id="servicos" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/10">
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#009577]">
-            Nossos Serviços
-          </span>
-          <h2 className="font-display text-3xl sm:text-5xl font-bold tracking-tight">
-            Compra Assistida: você decide, a gente garante.
-          </h2>
-          <p className="text-[#C9CFCE] text-sm sm:text-base">
-            Dois caminhos com o mesmo rigor técnico: encontramos o carro ideal do zero ou inspecionamos o veículo que você já escolheu.
-          </p>
-        </div>
-
+      <section id="servicos" className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch max-w-6xl mx-auto">
           {/* CAR HUNTER (FEATURED) */}
           <div className="bg-gradient-to-b from-[#009577]/15 via-[#17181A] to-[#17181A] border-2 border-[#009577] p-8 sm:p-10 rounded-[14px] relative shadow-2xl flex flex-col justify-between hover:shadow-[#009577]/25 transition-all">
@@ -101,7 +89,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate }) => {
             </div>
 
             <a
-              href="https://wa.me/5551992000130"
+              href={`https://wa.me/5551992000130?text=${encodeURIComponent('Olá, vim pelo site da Casti Car. Quero marcar uma conversa para saber como funciona!')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-6 w-full py-4 rounded-full text-sm font-semibold bg-gradient-to-br from-[#009577] to-[#01484B] hover:opacity-95 text-white transition-all text-center flex items-center justify-center gap-2.5 shadow-lg shadow-[#009577]/30 cursor-pointer active:scale-95"
@@ -111,12 +99,12 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate }) => {
             </a>
           </div>
 
-          {/* INSPEÇÃO PRÉ-COMPRA */}
+          {/* AVALIAÇÃO VEICULAR */}
           <div className="card-surface p-8 sm:p-10 rounded-[14px] relative flex flex-col justify-between hover:border-white/20 transition-colors shadow-xl">
             <div>
               <div className="flex items-center gap-3 mb-2">
                 <ShieldCheck className="w-6 h-6 text-white/80" />
-                <h3 className="font-display text-2xl sm:text-3xl font-bold">Inspeção Pré-Compra</h3>
+                <h3 className="font-display text-2xl sm:text-3xl font-bold">Avaliação Veicular</h3>
               </div>
               <p className="text-white/70 font-medium text-sm mb-4">
                 Já achou o carro? Confirme antes de fechar negócio.
@@ -150,28 +138,15 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate }) => {
             </div>
 
             <a
-              href="https://wa.me/5551992000130"
+              href={`https://wa.me/5551992000130?text=${encodeURIComponent('Olá, vim pelo site da Casti Car. Quero marcar uma conversa para saber como funciona!')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-6 w-full py-4 rounded-full text-sm font-semibold bg-white text-gray-900 hover:bg-gray-100 transition-colors text-center flex items-center justify-center gap-2.5 cursor-pointer active:scale-95 shadow-md"
             >
               <WhatsAppIcon className="w-4 h-4 fill-current" />
-              <span>Quero vistoriar um carro</span>
+              <span>Solicitar Avaliação Veicular</span>
             </a>
           </div>
-        </div>
-
-        <div className="mt-10 text-center">
-          <button
-            onClick={() => {
-              onNavigate('servicos');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold bg-white/10 text-white hover:bg-white/20 border border-white/20 transition-all cursor-pointer"
-          >
-            <span>Ver detalhes de todos os serviços</span>
-            <ArrowRight className="w-4 h-4 text-[#009577]" />
-          </button>
         </div>
       </section>
 
